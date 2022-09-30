@@ -15,6 +15,7 @@
  * \author Kevin Rogovin <kevin.rogovin@gmail.com>
  *
  */
+
 vec4
 fastuidraw_gl_frag_main(in uint sub_shader,
                         inout uint shader_data_block)
@@ -58,7 +59,7 @@ fastuidraw_gl_frag_main(in uint sub_shader,
       cvg = 1.0 - cvg;
     }
 
-  #if defined(FASTUIDRAW_DEBUG) && 0
+  #if defined(FASTUIDRAW_DEBUG)
     {
       const float tol = 3.0;
       float tol_x = tol * fwidth(glyph_coord.x);

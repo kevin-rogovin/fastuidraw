@@ -1,6 +1,7 @@
 #include <fastuidraw/gl_backend/gl_get.hpp>
 #include <fastuidraw/text/glyph_generate_params.hpp>
 #include <fastuidraw/text/glyph_render_data_restricted_rays.hpp>
+#include <fastuidraw/glsl/shader_source.hpp>
 #include "sdl_painter_demo.hpp"
 #include "text_helper.hpp"
 
@@ -271,7 +272,7 @@ sdl_painter_demo::
 sdl_painter_demo(const std::string &about_text,
                  bool default_value_for_print_painter):
   sdl_demo(about_text),
-
+  m_add_shader_debug_code(fastuidraw::glsl::ShaderSource::include_fastuidraw_debug(), "add_shader_debug_code", "", *this),
   m_image_atlas_options("Image Atlas Options", *this),
   m_log2_color_tile_size(m_image_atlas_params.log2_color_tile_size(), "log2_color_tile_size",
                          "Specifies the log2 of the width and height of each color tile.",
@@ -580,6 +581,8 @@ sdl_painter_demo::
 init_gl(int w, int h)
 {
   int max_layers(0);
+
+  fastuidraw::glsl::ShaderSource::include_fastuidraw_debug(m_add_shader_debug_code.value());
 
   max_layers = fastuidraw::gl::context_get<GLint>(GL_MAX_ARRAY_TEXTURE_LAYERS);
   if (max_layers < m_num_color_layers.value())

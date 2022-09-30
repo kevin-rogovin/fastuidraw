@@ -640,11 +640,10 @@ assembled_code(bool code_only) const
                                   << "\n";
         }
 
-      #ifdef FASTUIDRAW_DEBUG
+      if (include_fastuidraw_debug())
         {
           output_glsl_source_code << "#define FASTUIDRAW_DEBUG\n";
         }
-      #endif
 
       for(const SourcePrivate::source_code_t &src : d->m_values)
         {
@@ -668,4 +667,24 @@ assembled_code(bool code_only) const
   return code_only ?
     d->m_assembled_code_base.c_str():
     d->m_assembled_code.c_str();
+}
+
+#ifdef FASTUIDRAW_DEBUG
+static bool sm_shades_source_include_fastuidraw_debug = true;
+#else
+static bool sm_shades_source_include_fastuidraw_debug = false;
+#endif
+
+bool
+fastuidraw::glsl::ShaderSource::
+include_fastuidraw_debug(void)
+{
+  return sm_shades_source_include_fastuidraw_debug;
+}
+
+void
+fastuidraw::glsl::ShaderSource::
+include_fastuidraw_debug(bool v)
+{
+  sm_shades_source_include_fastuidraw_debug = v;
 }

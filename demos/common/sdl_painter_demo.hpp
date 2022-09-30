@@ -123,6 +123,8 @@ private:
   fastuidraw::gl::PainterEngineGL::ImageAtlasParams m_image_atlas_params;
   fastuidraw::gl::PainterEngineGL::ConfigurationGL m_painter_params;
 
+  command_line_argument_value<bool> m_add_shader_debug_code;
+
   /* Image atlas parameters */
   command_separator m_image_atlas_options;
   command_line_argument_value<unsigned int> m_log2_color_tile_size, m_log2_num_color_tiles_per_row_per_col;

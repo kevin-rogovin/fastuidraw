@@ -447,6 +447,14 @@ public:
   c_string
   assembled_code(bool code_only = false) const;
 
+  static
+  bool
+  include_fastuidraw_debug(void);
+
+  static
+  void
+  include_fastuidraw_debug(bool);
+
 private:
   void *m_d;
 };
